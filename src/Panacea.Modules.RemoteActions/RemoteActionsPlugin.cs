@@ -1,4 +1,5 @@
 ﻿using Panacea.Core;
+using Panacea.Modularity;
 using Panacea.Modularity.UiManager;
 using Panacea.Modules.RemoteActions.Models;
 using System;
@@ -11,7 +12,7 @@ using System.Windows;
 
 namespace Panacea.Modules.RemoteActions
 {
-    public class RemoteActionsPlugin
+    public class RemoteActionsPlugin : IPlugin
     {
         private PanaceaServices _core;
         
@@ -143,6 +144,25 @@ namespace Panacea.Modules.RemoteActions
             catch
             {
             }
+        }
+        public Task BeginInit()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task EndInit()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task Shutdown()
+        {
+            return Task.CompletedTask;
+        }
+
+        public void Dispose()
+        {
+            return;
         }
     }
 }
