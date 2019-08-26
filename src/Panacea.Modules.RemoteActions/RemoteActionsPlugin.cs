@@ -15,7 +15,7 @@ namespace Panacea.Modules.RemoteActions
     public class RemoteActionsPlugin : IPlugin
     {
         private PanaceaServices _core;
-        
+
         public RemoteActionsPlugin(PanaceaServices core)
         {
             _core = core;
@@ -37,7 +37,8 @@ namespace Panacea.Modules.RemoteActions
                         if (d.User.Id == _core.UserService.User.Id && d.Terminal.Name == Environment.MachineName)
                         {
                             await _core.UserService.SetUser(null);
-                            if (_core.TryGetUiManager(out IUiManager ui)){
+                            if (_core.TryGetUiManager(out IUiManager ui))
+                            {
                                 ui.GoHome();
                             }
                         }
@@ -125,7 +126,11 @@ namespace Panacea.Modules.RemoteActions
                     {
                         case "restartPanacea":
                             _core.WebSocket.Emit("offline", new { });
-                            _core.GetUiManager().Restart("restartPanacea command received");
+                            if (_core.TryGetUiManager(out IUiManager ui))
+                            {
+                                ui.Restart("restartPanacea command received");
+                            }
+
                             break;
                         case "reboot":
                             //save a file to automatically login after reboot
